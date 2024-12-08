@@ -1715,19 +1715,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\함석환\\.nuget\\packages\\": {}
+    "C:\\Users\\babel\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\함석환\\source\\repos\\MOCVD_UI\\SapphireXR_Test\\SapphireXR_App\\SapphireXR_App.csproj",
+      "projectUniqueName": "D:\\Workspace\\MOCVD_Test\\SapphireXR_Test\\SapphireXR_App\\SapphireXR_App.csproj",
       "projectName": "SapphireXR_App",
-      "projectPath": "C:\\Users\\함석환\\source\\repos\\MOCVD_UI\\SapphireXR_Test\\SapphireXR_App\\SapphireXR_App.csproj",
-      "packagesPath": "C:\\Users\\함석환\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\함석환\\source\\repos\\MOCVD_UI\\SapphireXR_Test\\SapphireXR_App\\obj\\",
+      "projectPath": "D:\\Workspace\\MOCVD_Test\\SapphireXR_Test\\SapphireXR_App\\SapphireXR_App.csproj",
+      "packagesPath": "C:\\Users\\babel\\.nuget\\packages\\",
+      "outputPath": "D:\\Workspace\\MOCVD_Test\\SapphireXR_Test\\SapphireXR_App\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\함석환\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\babel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
