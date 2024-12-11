@@ -161,7 +161,7 @@ namespace SapphireXR_App.ViewModels
     public ICommand SelectedItemsLeftPlotTagCommand => selectedItemsLeftPlotTagCommand ??= new RelayCommand<object>(PerformSelectedItemsLeftPlotTag);
     public ICommand SelectedItemsRightPlotTagCommand => selectedItemsRightPlotTagCommand ??= new RelayCommand<object>(PerformSelectedItemsRightPlotTag);
     public ICommand CbCheckedPlotTagCommand => cbCheckedPlotTagCommand ??= new RelayCommand<string>(PerformCbCheckedPlotTag);
-    public ICommand CbUncheckedPlotTagCommand => cbUncheckedPlotTagCommand??= new RelayCommand<string>(PerformCbUncheckedPlotTag);
+    public ICommand CbUncheckedPlotTagCommand => cbUncheckedPlotTagCommand ??= new RelayCommand<string>(PerformCbUncheckedPlotTag);
     public ICommand BtnMoveToLeftPlotTagCommand => btnMoveToLeftPlotTagCommand ??= new RelayCommand(PerformBtnMoveToLeftPlotTag);
     public ICommand BtnMoveToRightPlotTagCommand => btnMoveToRightPlotTagCommand ??= new RelayCommand(PerformBtnMoveToRightPlotTag);
     public ICommand BtnMoveToLeftPlotTagAllCommand => btnMoveToLeftPlotTagAllCommand ??= new RelayCommand(PerformBtnMoveToLeftPlotTagAll);
@@ -188,7 +188,6 @@ namespace SapphireXR_App.ViewModels
           LeftVisiablePlotTag.Add(tag);
         }
       }
-
       foreach (var tag in RightTags)
       {
         if (tag.Substring(0, 2) == content && !RightVisiablePlotTag.Contains(tag))
@@ -196,10 +195,8 @@ namespace SapphireXR_App.ViewModels
           RightVisiablePlotTag.Add(tag);
         }
       }
-
       OnPropertyChanged(nameof(LeftVisiablePlotTag));
       OnPropertyChanged(nameof(RightVisiablePlotTag));
-
     }
 
     private void PerformCbUncheckedPlotTag(string content)
@@ -220,7 +217,6 @@ namespace SapphireXR_App.ViewModels
       }
       OnPropertyChanged(nameof(LeftVisiablePlotTag));
       OnPropertyChanged(nameof(RightVisiablePlotTag));
-
     }
 
     private void PerformSelectedItemsLeftPlotTag(object arg)
@@ -260,7 +256,7 @@ namespace SapphireXR_App.ViewModels
       if (eventArg.RemovedItems.Count > 0)
       {
         var tag = eventArg.RemovedItems[0] as string;
-        if (!RightSelectedTags.Contains(tag))
+        if (RightSelectedTags.Contains(tag))
         {
           RightSelectedTags.Remove(tag);
         }
@@ -273,23 +269,28 @@ namespace SapphireXR_App.ViewModels
       if (LeftSelectedTags.Count == 0) return;
 
       List<string> tags = [];
-      foreach (var tag in LeftSelectedTags) { tags.Add(tag); }
+      foreach (var tag in LeftSelectedTags)
+      {
+        tags.Add(tag);
+      }
 
       foreach (var tag in tags)
       {
+        if (LeftTags.Contains(tag))
+        {
+          LeftTags.Remove(tag);
+        }
+        if (!RightTags.Contains(tag))
+        {
+          RightTags.Add(tag);
+        }
         LeftVisiablePlotTag.Remove(tag);
         RightVisiablePlotTag.Add(tag);
       }
 
-      LeftTags.Clear();
-      foreach (var tag in LeftVisiablePlotTag) { LeftTags.Add(tag); }
-      RightTags.Clear();
-      foreach (var tag in RightVisiablePlotTag) { RightTags.Add(tag); }
-
+      LeftSelectedTags.Clear();
       OnPropertyChanged(nameof(LeftVisiablePlotTag));
       OnPropertyChanged(nameof(RightVisiablePlotTag));
-
-      LeftSelectedTags.Clear();
     }
 
 
@@ -298,24 +299,28 @@ namespace SapphireXR_App.ViewModels
       if (RightSelectedTags.Count == 0) return;
 
       List<string> tags = [];
-      foreach (var tag in RightSelectedTags) { tags.Add(tag); }
+      foreach (var tag in RightSelectedTags)
+      {
+        tags.Add(tag);
+      }
 
       foreach (var tag in tags)
       {
+        if (RightTags.Contains(tag))
+        {
+          RightTags.Remove(tag);
+        }
+        if (!LeftTags.Contains(tag))
+        {
+          LeftTags.Add(tag);
+        }
         LeftVisiablePlotTag.Add(tag);
         RightVisiablePlotTag.Remove(tag);
       }
 
-      LeftTags.Clear();
-      foreach (var tag in LeftVisiablePlotTag) { LeftTags.Add(tag); }
-      RightTags.Clear();
-      foreach (var tag in RightVisiablePlotTag) { RightTags.Add(tag); }
-
+      RightSelectedTags.Clear();
       OnPropertyChanged(nameof(LeftVisiablePlotTag));
       OnPropertyChanged(nameof(RightVisiablePlotTag));
-
-      RightSelectedTags.Clear();
-
     }
 
     private void PerformBtnMoveToRightPlotTagAll()
@@ -541,7 +546,7 @@ namespace SapphireXR_App.ViewModels
     {
       logFilepath2 = "";
       ReportCompareData2 = [];
-      
+
       PlotData(RightVisiablePlotTag.Count);
 
       OnPropertyChanged(nameof(logFilepath2));
